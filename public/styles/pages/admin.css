@@ -1,0 +1,30 @@
+.add-btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 8px 20px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+.film-btns {
+    display: flex;
+    flex-direction: column;
+}
+.film-btns a {
+    display: inline-block;
+    /* width: 100%; */
+    margin-bottom: 10px;
+    text-align: center;
+    padding: 8px 30px;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.film-btns a:first-child {
+    background-color: #eeb779;
+}
+.film-btns a:last-child {
+    background-color: #e0743e;
+}

@@ -1,0 +1,88 @@
+header {
+    padding: 13px 11%;
+    background-color: #141414;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+}
+
+
+.header-menu {
+    display: flex;
+    gap: 20px;
+    width: 60%;
+}
+.header-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #ffffff99;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.header-search {
+    background-color: #f2f2f2;
+    width: 60%;
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.header-search input {
+    background-color: transparent;
+    padding: 8px 16px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    width: 100%;
+}
+.header-search button {
+    background-color: transparent;
+    width: 30px;
+    /* height: 100%; */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-buttons{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.header-buttons a {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+}
+.header-buttons a:first-child {
+    border: none;
+    font-size: 11px;
+    padding: 8px 20px;
+    border-radius: 40px;
+}
+
+.header-buttons a:last-child {
+    color: #ffffff99;
+    font-size: 15px;
+    background-color: transparent;
+    border: none;
+}
+
+.header-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.header-avatar img {
+    width: 100%;
+    height: 100%;
+}

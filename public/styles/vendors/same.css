@@ -1,0 +1,21 @@
+.box {
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    padding: 0 8%;
+}
+
+.main {
+    background-color: #fff;
+    min-height: 100vh;
+    padding-top: 67px;
+}
+
+.btn-gradient {
+    background: linear-gradient(90deg,#ff5c4d,#eb469f 26.56%,#8341ef 75%,#3f68f9);
+    color: #fff;
+    font-weight: 700;
+}
+
+button {
+    cursor: pointer;
+}

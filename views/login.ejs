@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Авторизация</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    <div class="box">
+        <div class="main main-login">
+           <h3>Войти</h3>
+
+           <form action="/api/signin" method="POST" class="form">
+                <fieldset>
+                    <label for="">E-mail</label>
+                    <input type="text" placeholder="Введите почту" name="email">
+                </fieldset>
+
+                <fieldset>
+                    <label for="">Пароль</label>
+                    <input type="password" placeholder="Введите пароль" name="password">
+                </fieldset>
+
+                <fieldset>
+                    <button type="submit" class="btn-gradient">Авторизоваться</button>
+                </fieldset>
+
+                <p>У вас нет аккаунта? <a href="/register">Зарегистрироваться</a></p>
+           </form>
+        </div>
+    </div>
+</body>
+</html>

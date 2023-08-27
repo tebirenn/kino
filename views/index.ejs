@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Кинопоиск</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    <div class="box">
+        <div class="main main-index">
+            <div class="genres">
+                <h3>Жанры</h3>
+                <% genres.forEach((genre) => { %>
+                    <a href=""><%= genre.name %></a>
+                <% }) %>
+            </div>
+
+            <div class="main-content">
+                <h1>Список фильмов</h1>
+
+                <div class="film-card">
+                    <div class="card-left">
+                        <div class="film-poster">
+                            <img src="https://m.media-amazon.com/images/I/61Z6bxl6JsL.jpg" alt="">
+                        </div>
+
+                        <div class="film-info">
+                            <p class="film-name">Зеленая книга</p>
+                            <p class="film-prefix">Green Book, 2018, 130 мин.</p>
+                            <p class="film-desc">США, Режиссёр: Питер Фарелли</p>
+                            <button class="btn-gradient">
+                                <img src="/images/icons/play.svg" alt="">
+                                Смотреть
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-right">
+                        <p class="film-rating">8.3</p>
+                        <button>
+                            <img src="/images/icons/save.svg" alt="">
+                            Буду смотреть
+                        </button>
+                    </div>
+                </div>
+
+                <div class="film-card">
+                    <div class="card-left">
+                        <div class="film-poster">
+                            <img src="https://m.media-amazon.com/images/I/61Z6bxl6JsL.jpg" alt="">
+                        </div>
+
+                        <div class="film-info">
+                            <p class="film-name">Зеленая книга</p>
+                            <p class="film-prefix">Green Book, 2018, 130 мин.</p>
+                            <p class="film-desc">США, Режиссёр: Питер Фарелли</p>
+                            <button class="btn-gradient">
+                                <img src="/images/icons/play.svg" alt="">
+                                Смотреть
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-right">
+                        <p class="film-rating">8.3</p>
+                        <button>
+                            <img src="/images/icons/save.svg" alt="">
+                            Буду смотреть
+                        </button>
+                    </div>
+                </div>
+
+                <div class="film-card">
+                    <div class="card-left">
+                        <div class="film-poster">
+                            <img src="https://m.media-amazon.com/images/I/61Z6bxl6JsL.jpg" alt="">
+                        </div>
+
+                        <div class="film-info">
+                            <p class="film-name">Зеленая книга</p>
+                            <p class="film-prefix">Green Book, 2018, 130 мин.</p>
+                            <p class="film-desc">США, Режиссёр: Питер Фарелли</p>
+                            <button class="btn-gradient">
+                                <img src="/images/icons/play.svg" alt="">
+                                Смотреть
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="card-right">
+                        <p class="film-rating">8.3</p>
+                        <button>
+                            <img src="/images/icons/save.svg" alt="">
+                            Буду смотреть
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Новый фильм</title>
+</head>
+<body>
+    <%- include('partials/header.ejs') %>
+    <div class="box">
+        <div class="main main-login">
+           <h3>Добавить фильм</h3>
+
+           <form action="" method="POST" class="form">
+                <fieldset>
+                    <label for="">Постер фильмы</label>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="inputGroupFile02">
+                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <label for="">Название</label>
+                    <input type="text" placeholder="Введите название фильма" name="title-ru">
+                </fieldset>
+
+                <fieldset>
+                    <label for="">Оргинальное название</label>
+                    <input type="text" placeholder="Введите оригинальное название фильма" name="title-orig">
+                </fieldset>
+
+                <fieldset>
+                    <label for="">Год выпуска</label>
+                    <input type="text" placeholder="Введите год выпуска фильма" name="year">
+                </fieldset>
+
+                <fieldset>
+                    <label for="">Длительность фильма</label>
+                    <input type="text" placeholder="Введите длительность фильма в минутах" name="time">
+                </fieldset>
+
+                <fieldset>
+                    <label for="">Страна выпуска</label>
+                    <select name="country" class="form-select" aria-label="Default select example">
+                        <option value="">КЗ</option>
+                        <option value="">РУ</option>
+                        <option value="">США</option>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <label for="">Жанр</label>
+                    <select name="genre" class="form-select" aria-label="Default select example">
+                        <% genres.forEach((genre) => { %>
+                            <option value=""><%= genre.name %></option>
+                        <% }) %>
+                    </select>
+                </fieldset>
+
+                <fieldset>
+                    <button type="submit" class="btn-gradient">Добавить</button>
+                </fieldset>
+           </form>
+        </div>
+    </div>
+</body>
+</html>
