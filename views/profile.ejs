@@ -24,8 +24,10 @@
                     <div class="profile-info">
                         <p><b>Полное имя:</b> <span><%= user.full_name %></span></p>
                         <p><b>E-mail:</b> <span><%= user.email %></span></p>
-                        <a href="" class="btn-gradient edit-btn">Редактировать</a>
-                        <a href="/api/signout" class="logout-btn">Выход</a>
+                        <% if (user.id == loginUser.id) { %>
+                            <a href="" class="btn-gradient edit-btn">Редактировать</a>
+                            <a href="/api/signout" class="logout-btn">Выход</a>
+                        <% } %>
                     </div>
                 </div>
 

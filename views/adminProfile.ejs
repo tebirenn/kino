@@ -24,8 +24,10 @@
                     <div class="profile-info">
                         <p><b>Полное имя:</b> <span>Алан Саудабеков</span></p>
                         <p><b>E-mail:</b> <span>a_saudabekov9@gmail.com</span></p>
-                        <button class="btn-gradient edit-btn">Редактировать</button>
-                        <button class="logout-btn">Выход</button>
+                        <% if (user.id == loginUser.id) { %>
+                            <a class="btn-gradient edit-btn">Редактировать</a>
+                            <a class="logout-btn" href="/api/signout">Выход</a>
+                        <% } %>
                     </div>
                 </div>
 

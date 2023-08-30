@@ -10,23 +10,23 @@
         <div class="main main-login">
            <h3>Добавить фильм</h3>
 
-           <form action="" method="POST" class="form">
+           <form action="/api/films/new" method="POST" class="form" enctype="multipart/form-data">
                 <fieldset>
                     <label for="">Постер фильмы</label>
                     <div class="input-group">
-                        <input type="file" class="form-control" id="inputGroupFile02">
+                        <input type="file" class="form-control" id="inputGroupFile02" name="poster">
                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <label for="">Название</label>
-                    <input type="text" placeholder="Введите название фильма" name="title-ru">
+                    <input type="text" placeholder="Введите название фильма" name="titleRu">
                 </fieldset>
 
                 <fieldset>
                     <label for="">Оргинальное название</label>
-                    <input type="text" placeholder="Введите оригинальное название фильма" name="title-orig">
+                    <input type="text" placeholder="Введите оригинальное название фильма" name="titleOrig">
                 </fieldset>
 
                 <fieldset>
@@ -42,9 +42,9 @@
                 <fieldset>
                     <label for="">Страна выпуска</label>
                     <select name="country" class="form-select" aria-label="Default select example">
-                        <option value="">КЗ</option>
-                        <option value="">РУ</option>
-                        <option value="">США</option>
+                        <% countries.forEach((country) => { %>
+                            <option value="<%= country._id %>"><%= country.name %></option>
+                        <% }) %>
                     </select>
                 </fieldset>
 
@@ -52,7 +52,7 @@
                     <label for="">Жанр</label>
                     <select name="genre" class="form-select" aria-label="Default select example">
                         <% genres.forEach((genre) => { %>
-                            <option value=""><%= genre.name %></option>
+                            <option value="<%= genre._id %>"><%= genre.name %></option>
                         <% }) %>
                     </select>
                 </fieldset>

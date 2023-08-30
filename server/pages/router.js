@@ -2,12 +2,17 @@ const express = require('express');
 const router = express.Router();
 
 const Genres = require('../Genres/Genres');
+const Users = require('../auth/Users');
+const Countries = require('../Countries/Countries');
+const Films = require('../Films/Films');
 
 router.get('/', async(req, res) => {
     const genres = await Genres.find();
+    const films = await Films.find().populate('genre').populate('country').populate('author');
 
     const data = {
         genres: genres,
+        films: films,
         user: req.user ? req.user : {}
     }
 
@@ -30,31 +35,44 @@ router.get('/register', (req, res) => {
     res.render('register', data);
 });
 
-router.get('/profile', (req, res) => {
-    const data = {
-        user: req.user ? req.user : {}
+router.get('/profile/:id', async(req, res) => {
+    try {
+        const user = await Users.findById(req.params.id);
+
+        const data = {
+            user: user,
+            loginUser: req.user ? req.user : {}
+        }
+        
+        res.render('profile', data);
+    } catch (e) {
+        res.redirect('/not-found');
     }
 
-    if (!data.user) {
-        res.redirect('/login');
-    }
-
-    res.render('profile', data);
 });
 
-router.get('/admin', (req, res) => {
-    const data = {
-        user: req.user ? req.user : {}
-    }
+router.get('/admin/:id', async(req, res) => {
+    try {
+        const user = await Users.findById(req.params.id);
 
-    res.render('adminProfile', data);
+        const data = {
+            user: user,
+            loginUser: req.user ? req.user : {}
+        }
+        
+        res.render('adminProfile', data);
+    } catch (e) {
+        res.redirect('/not-found');
+    }
 });
 
 router.get('/new', async(req, res) => {
     const genres = await Genres.find();
+    const countries = await Countries.find();
 
     const data = {
         genres: genres,
+        countries: countries,
         user: req.user ? req.user : {}
     } 
 
@@ -63,13 +81,19 @@ router.get('/new', async(req, res) => {
 
 router.get('/edit', async(req, res) => {
     const genres = await Genres.find();
+    const countries = await Countries.find();
 
     const data = {
         genres: genres,
+        countries: countries,
         user: req.user ? req.user : {}
     }
 
     res.render('editFilm', data);
+});
+
+router.get('/not-found', (req, res) => {
+    res.render('notFound');
 });
 
 

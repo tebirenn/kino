@@ -22,12 +22,16 @@
 
     <div class="header-buttons">
         <a href="" class="btn-gradient">Смотреть кино <br>бесплатно</a>
-        <% if (user.email) { %>
-        <a href="/profile" class="header-avatar">
-            <img src="/images/default-avatar.jfif" alt="">
-        </a>
+        <% if (user.email && user.isAdmin) { %>
+            <a href="/admin/<%= user.id %>" class="header-avatar">
+                <img src="/images/default-avatar.jfif" alt="">
+            </a>
+        <% } else if (user.email) { %>
+            <a href="/profile/<%= user.id %>" class="header-avatar">
+                <img src="/images/default-avatar.jfif" alt="">
+            </a>
         <% } else { %>
-        <a href="/login">Войти</a>
+            <a href="/login">Войти</a>
         <% } %>
     </div>
 </header>
