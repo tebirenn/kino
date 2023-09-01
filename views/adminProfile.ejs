@@ -33,16 +33,19 @@
 
                 <h1>Список фильмов</h1>
                 <a href="/new" class="add-btn btn-gradient">Добавить фильм/сериал</a>
+
+                <% films.forEach((film) => { %>
                 <div class="film-card">
                     <div class="card-left">
                         <div class="film-poster">
-                            <img src="https://m.media-amazon.com/images/I/61Z6bxl6JsL.jpg" alt="">
+                            <img src="<%= film.poster %>" alt="">
                         </div>
 
                         <div class="film-info">
-                            <p class="film-name">Зеленая книга</p>
-                            <p class="film-prefix">Green Book, 2018, 130 мин.</p>
-                            <p class="film-desc">США, Режиссёр: Питер Фарелли</p>
+                            <p class="film-name"><%= film.titleRu %></p>
+                            <p class="film-prefix"><%= film.titleOrig %>, <%= film.year %>, <%= film.time %> мин.</p>
+                            <p class="film-desc"><%= film.country.name %>, <%= film.genre.name %></p>
+                            <p class="film-author"><%= film.author.full_name %></p>
                             <button class="btn-gradient">
                                 <img src="/images/icons/play.svg" alt="">
                                 Смотреть
@@ -53,18 +56,21 @@
                     <div class="card-right">
                         <p class="film-rating">8.3</p>
                         <div class="film-btns">
-                            <a href="/edit">
+                            <a href="/edit/<%= film._id %>" class="edit-film-btn">
                                 Редактировать
                             </a>
-                            <a href="/delete">
+                            <button class="delete-film-btn" onclick="deleteFilm('<%= film._id %>', '<%= loginUser._id %>')">
                                 Удалить
-                            </a>
+                            </button>
                         </div>
                     </div>
                 </div>
+                <% }) %>
 
             </div>
         </div>
     </div>
+
+    <%- include('partials/scripts.ejs') %>
 </body>
 </html>

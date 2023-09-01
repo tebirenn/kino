@@ -8,60 +8,73 @@
     <%- include('partials/header.ejs') %>
     <div class="box">
         <div class="main main-login">
-           <h3>Редактировать фильм</h3>
+            <h3>Редактировать фильм</h3>
 
-           <form action="" method="POST" class="form">
+            <form action="/api/films/edit" method="POST" class="form" enctype="multipart/form-data">
+                <fieldset>
+                    <input type="hidden" name="id" value="<%= film._id %>">
+                </fieldset>
                 <fieldset>
                     <label for="">Постер фильмы</label>
                     <div class="input-group">
-                        <input type="file" class="form-control" id="inputGroupFile02">
+                        <input type="file" class="form-control" id="inputGroupFile02" name="poster">
                         <label class="input-group-text" for="inputGroupFile02">Upload</label>
                     </div>
                 </fieldset>
 
                 <fieldset>
                     <label for="">Название</label>
-                    <input type="text" placeholder="Введите название фильма" name="title-ru">
+                    <input type="text" placeholder="Введите название фильма" name="titleRu" value="<%= film.titleRu %>">
                 </fieldset>
 
                 <fieldset>
                     <label for="">Оргинальное название</label>
-                    <input type="text" placeholder="Введите оригинальное название фильма" name="title-orig">
+                    <input type="text" placeholder="Введите оригинальное название фильма" name="titleOrig" value="<%= film.titleOrig %>">
                 </fieldset>
 
                 <fieldset>
                     <label for="">Год выпуска</label>
-                    <input type="text" placeholder="Введите год выпуска фильма" name="year">
+                    <input type="text" placeholder="Введите год выпуска фильма" name="year" value="<%= film.year %>">
                 </fieldset>
 
                 <fieldset>
                     <label for="">Длительность фильма</label>
-                    <input type="text" placeholder="Введите длительность фильма в минутах" name="time">
+                    <input type="text" placeholder="Введите длительность фильма в минутах" name="time" value="<%= film.time %>">
                 </fieldset>
 
                 <fieldset>
                     <label for="">Страна выпуска</label>
                     <select name="country" class="form-select" aria-label="Default select example">
-                        <option value="">КЗ</option>
-                        <option value="">РУ</option>
-                        <option value="">США</option>
+                        <% countries.forEach((country) => {
+                            if (country.id == film.country) { %>
+                                <option value="<%= country._id %>" selected><%= country.name %></option>
+                            <% } else { %>
+                                <option value="<%= country._id %>"><%= country.name %></option>
+                        <%  }
+                        }) %>
                     </select>
                 </fieldset>
 
                 <fieldset>
                     <label for="">Жанр</label>
                     <select name="genre" class="form-select" aria-label="Default select example">
-                        <% genres.forEach((genre) => { %>
-                            <option value=""><%= genre.name %></option>
-                        <% }) %>
+                        <% genres.forEach((genre) => {
+                            if (genre.id == film.genre) { %>
+                                <option value="<%= genre._id %>" selected><%= genre.name %></option>
+                            <% } else { %>
+                                <option value="<%= genre._id %>"><%= genre.name %></option>
+                        <%  }
+                        }) %>
                     </select>
                 </fieldset>
 
                 <fieldset>
                     <button type="submit" class="btn-gradient">Сохранить</button>
                 </fieldset>
-           </form>
+            </form>
         </div>
     </div>
+
+    <%- include('partials/scripts.ejs') %>
 </body>
 </html>

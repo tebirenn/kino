@@ -1,4 +1,4 @@
-const isAuth = (req, res, next) => {
+const isAdmin = (req, res, next) => {
     if (req.user && req.user.isAdmin) {
         next();
     } else {
@@ -6,5 +6,13 @@ const isAuth = (req, res, next) => {
     }
 }
 
+const isAuth = (req, res, next) => {
+    if (req.user) {
+        next();
+    } else {
+        res.status(401).send('Unauthrorized or don\'t have access');
+    }
+}
 
-module.exports = { isAuth };
+
+module.exports = { isAdmin, isAuth };

@@ -54,10 +54,12 @@ router.get('/profile/:id', async(req, res) => {
 router.get('/admin/:id', async(req, res) => {
     try {
         const user = await Users.findById(req.params.id);
+        const films = await Films.find().populate('country').populate('genre').populate('author');
 
         const data = {
             user: user,
-            loginUser: req.user ? req.user : {}
+            loginUser: req.user ? req.user : {},
+            films: films,
         }
         
         res.render('adminProfile', data);
@@ -79,13 +81,15 @@ router.get('/new', async(req, res) => {
     res.render('newFilm', data);
 });
 
-router.get('/edit', async(req, res) => {
+router.get('/edit/:id', async(req, res) => {
     const genres = await Genres.find();
     const countries = await Countries.find();
+    const film = await Films.findById(req.params.id);
 
     const data = {
         genres: genres,
         countries: countries,
+        film: film,
         user: req.user ? req.user : {}
     }
 

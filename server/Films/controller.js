@@ -1,4 +1,6 @@
 const Films = require('./Films');
+const fs = require('fs');
+const path = require('path');
 
 
 const createFilm = async(req, res) => {
@@ -26,5 +28,47 @@ const createFilm = async(req, res) => {
     }
 }
 
+const editFilm = async(req, res) => {
+    if (req.file && req.body.titleRu.length > 0 &&
+        req.body.titleOrig.length > 0 &&
+        req.body.country.length > 0 &&
+        req.body.genre.length > 0 &&
+        req.body.year.length > 0 &&
+        req.body.time.length > 0) {
 
-module.exports = { createFilm };
+        const film = await Films.findById(req.body.id);
+        fs.unlinkSync(path.join(__dirname + '/../../public' + film.poster));
+
+        await Films.findByIdAndUpdate(req.body.id, {
+            titleRu: req.body.titleRu,
+            titleOrig: req.body.titleOrig,
+            year: req.body.year,
+            time: req.body.time,
+            country: req.body.country,
+            genre: req.body.genre,
+            author: req.user._id,
+            poster: `/images/films/${req.file.filename}`,
+        });
+
+        res.redirect(`/admin/${req.user._id}`);
+
+    } else {
+        res.redirect(`/edit/${req.body.id}?error=1`);
+    }
+}
+
+const deleteFilm = async(req, res) => {
+    try {
+        const film = await Films.findById(req.params.id);
+        fs.unlinkSync(path.join(__dirname + '/../../public' + film.poster));
+
+        await Films.deleteOne({_id: req.params.id});
+
+        res.status(200).send('film deleted');
+    } catch (e) {
+        res.status(404).send('film not found');
+    }
+}
+
+
+module.exports = { createFilm, editFilm, deleteFilm };
