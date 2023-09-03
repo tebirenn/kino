@@ -112,3 +112,12 @@
     border-radius: 20px;
     font-weight: 700;
 }
+
+.save-btn img {
+    width: 18px;
+}
+
+.film-link {
+    text-decoration: none;
+    color: #000;
+}

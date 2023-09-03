@@ -6,6 +6,8 @@ const UsersSchema = new mongoose.Schema({
     full_name: String,
     password: String,
     isAdmin: Boolean,
+    toWatch: [{type: mongoose.Schema.Types.ObjectId, ref: 'films'}],
+    watched: [{type: mongoose.Schema.Types.ObjectId, ref: 'films'}],
 });
 
 

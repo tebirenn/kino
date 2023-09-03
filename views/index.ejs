@@ -19,6 +19,7 @@
                 <h1>Список фильмов</h1>
 
                 <% films.forEach((film) => { %>
+                <a href="/details/<%= film._id %>" class="film-link">
                 <div class="film-card">
                     <div class="card-left">
                         <div class="film-poster">
@@ -38,12 +39,20 @@
 
                     <div class="card-right">
                         <p class="film-rating">8.3</p>
-                        <button>
-                            <img src="/images/icons/save.svg" alt="">
-                            Буду смотреть
-                        </button>
+                        <% if (user && user.toWatch && user.toWatch.includes(film._id)) { %>
+                            <button class="save-btn" onclick="unsaveFilm('<%= film._id %>')">
+                                <img src="/images/icons/saved.svg" alt="">
+                                Сохранено
+                            </button>
+                        <% } else { %>
+                            <button class="save-btn" onclick="saveFilm('<%= film._id %>')">
+                                <img src="/images/icons/save.svg" alt="">
+                                Буду смотреть
+                            </button>
+                        <% } %>
                     </div>
                 </div>
+                </a>
                 <% }) %>
 
             </div>

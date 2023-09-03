@@ -1,6 +1,7 @@
 const Films = require('./Films');
 const fs = require('fs');
 const path = require('path');
+const Users = require('../auth/Users');
 
 
 const createFilm = async(req, res) => {
@@ -70,5 +71,40 @@ const deleteFilm = async(req, res) => {
     }
 }
 
+const saveToWatch = async(req, res) => {
+    if (req.body.id) {
+        const user = await Users.findById(req.user._id);
+        let findFilm = user.toWatch.filter((item) => item._id == req.body.id);
+        if (findFilm.length == 0) {
+            user.toWatch.push(req.body.id);
+            user.save();
+            res.send('ok');
+        } else {
+            res.send('error');
+        }
+    }
+}
 
-module.exports = { createFilm, editFilm, deleteFilm };
+const unsaveToWatch = async(req, res) => {
+    if (req.params.id) {
+        const user = await Users.findById(req.user._id);
+        for (let i = 0; i < user.toWatch.length; i++) {
+            if (user.toWatch[i] == req.params.id) {
+                user.toWatch.splice(i, 1);
+                user.save();
+                console.log('deleted');
+                break;
+            }
+        }
+        res.send('ok');
+    }
+}
+
+
+module.exports = { 
+    createFilm, 
+    editFilm, 
+    deleteFilm, 
+    saveToWatch, 
+    unsaveToWatch 
+};

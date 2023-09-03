@@ -33,83 +33,41 @@
 
                 <h1>Сохраненные фильмы</h1>
 
-                <div class="film-card">
-                    <div class="card-left">
-                        <div class="film-poster">
-                            <img src="https://m.media-amazon.com/images/I/61Z6bxl6JsL.jpg" alt="">
+                <% if (user.toWatch.length) {
+                    user.toWatch.forEach((film) => { %>
+                    
+                        <div class="film-card">
+                            <div class="card-left">
+                                <div class="film-poster">
+                                    <img src="<%= film.poster %>" alt="">
+                                </div>
+
+                                <div class="film-info">
+                                    <p class="film-name"><%= film.titleRu %></p>
+                                    <p class="film-prefix"><%= film.titleOrig %>, <%= film.year %>, <%= film.time %> мин.</p>
+                                    <p class="film-desc"><%= film.country.name %>, <%= film.genre.name %></p>
+                                    <button class="btn-gradient">
+                                        <img src="/images/icons/play.svg" alt="">
+                                        Смотреть
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="card-right">
+                                <p class="film-rating">8.3</p>
+                                <button class="save-btn" onclick="unsaveFilm('<%= film._id %>')">
+                                    <img src="/images/icons/saved.svg" alt="">
+                                    Сохранено
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="film-info">
-                            <p class="film-name">Зеленая книга</p>
-                            <p class="film-prefix">Green Book, 2018, 130 мин.</p>
-                            <p class="film-desc">США, Режиссёр: Питер Фарелли</p>
-                            <button class="btn-gradient">
-                                <img src="/images/icons/play.svg" alt="">
-                                Смотреть
-                            </button>
-                        </div>
-                    </div>
+                <%  })
+                } else { %>
+                    <h4>Список пуст...</h4>
+                <% } %>
+                
 
-                    <div class="card-right">
-                        <p class="film-rating">8.3</p>
-                        <button>
-                            <img src="/images/icons/save.svg" alt="">
-                            Буду смотреть
-                        </button>
-                    </div>
-                </div>
-
-                <div class="film-card">
-                    <div class="card-left">
-                        <div class="film-poster">
-                            <img src="https://m.media-amazon.com/images/I/61Z6bxl6JsL.jpg" alt="">
-                        </div>
-
-                        <div class="film-info">
-                            <p class="film-name">Зеленая книга</p>
-                            <p class="film-prefix">Green Book, 2018, 130 мин.</p>
-                            <p class="film-desc">США, Режиссёр: Питер Фарелли</p>
-                            <button class="btn-gradient">
-                                <img src="/images/icons/play.svg" alt="">
-                                Смотреть
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card-right">
-                        <p class="film-rating">8.3</p>
-                        <button>
-                            <img src="/images/icons/save.svg" alt="">
-                            Буду смотреть
-                        </button>
-                    </div>
-                </div>
-
-                <div class="film-card">
-                    <div class="card-left">
-                        <div class="film-poster">
-                            <img src="https://m.media-amazon.com/images/I/61Z6bxl6JsL.jpg" alt="">
-                        </div>
-
-                        <div class="film-info">
-                            <p class="film-name">Зеленая книга</p>
-                            <p class="film-prefix">Green Book, 2018, 130 мин.</p>
-                            <p class="film-desc">США, Режиссёр: Питер Фарелли</p>
-                            <button class="btn-gradient">
-                                <img src="/images/icons/play.svg" alt="">
-                                Смотреть
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card-right">
-                        <p class="film-rating">8.3</p>
-                        <button>
-                            <img src="/images/icons/save.svg" alt="">
-                            Буду смотреть
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

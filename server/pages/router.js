@@ -37,7 +37,9 @@ router.get('/register', (req, res) => {
 
 router.get('/profile/:id', async(req, res) => {
     try {
-        const user = await Users.findById(req.params.id);
+        const user = await Users.findById(req.params.id).populate('toWatch')
+        .populate({path: 'toWatch', populate: {path: 'country'}})
+        .populate({path: 'toWatch', populate: {path: 'genre'}});
 
         const data = {
             user: user,
@@ -98,6 +100,14 @@ router.get('/edit/:id', async(req, res) => {
 
 router.get('/not-found', (req, res) => {
     res.render('notFound');
+});
+
+router.get('/details/:id', async(req, res) => {
+    data = {
+        user: req.user ? req.user : {}
+    }
+
+    res.render('filmDetails', data);
 });
 
 
