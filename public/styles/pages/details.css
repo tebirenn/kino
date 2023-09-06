@@ -1,0 +1,69 @@
+.main-detail {
+    padding: 40px;
+    padding-top: 107px;
+}
+
+
+.detail-film {
+    display: flex;
+    justify-content: space-between;
+}
+.detail-left {
+    width: 25%;
+}
+.detail-poster {
+    width: 100%;
+}
+
+.detail-right {
+    width: 70%;
+}
+
+.detail-titleRu {
+    font-size: 40px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 20px;
+}
+.detail-titleOrig {
+    font-size: 18px;
+    color: #00000099;
+    margin-bottom: 25px;
+}
+
+.detail-save-btn {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 40px;
+}
+.detail-save-btn img {
+    width: 22px;
+    margin-right: 8px;
+}
+
+.detail-desc {
+    margin-top: 45px;
+}
+.detail-desc h3 {
+    font-size: 22px;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.desc--item {
+    display: flex;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.desc--item p:first-child {
+    width: 160px;
+    columns: #00000099;
+}
+
+.film-trailer {
+    margin-top: 20px;
+}

@@ -7,6 +7,7 @@ const FilmsSchema = mongoose.Schema({
     year: Number,
     time: Number,
     poster: String,
+    trailerURL: String,
     country: { type: mongoose.Schema.Types.ObjectId, ref: 'countries' },
     genre: { type: mongoose.Schema.Types.ObjectId, ref: 'genres' },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'users' },

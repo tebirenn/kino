@@ -7,8 +7,13 @@ const Countries = require('../Countries/Countries');
 const Films = require('../Films/Films');
 
 router.get('/', async(req, res) => {
+    const options = {};
+    if (req.query.genre) {
+        const selectedGenre = await Genres.findOne({key: req.query.genre});
+        options.genre = selectedGenre._id;
+    }
     const genres = await Genres.find();
-    const films = await Films.find().populate('genre').populate('country').populate('author');
+    const films = await Films.find(options).populate('genre').populate('country');
 
     const data = {
         genres: genres,
@@ -103,11 +108,20 @@ router.get('/not-found', (req, res) => {
 });
 
 router.get('/details/:id', async(req, res) => {
-    data = {
-        user: req.user ? req.user : {}
-    }
+    try {
+        const film = await Films.findById(req.params.id)
+                                .populate('country').populate('genre');
 
-    res.render('filmDetails', data);
+        data = {
+            user: req.user ? req.user : {},
+            film: film,
+        }
+    
+        res.render('filmDetails', data);
+    } catch (e) {
+        res.redirect('/not-found');
+    }
+    
 });
 
 

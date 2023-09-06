@@ -2,14 +2,58 @@
 <html lang="en">
 <head>
     <%- include('partials/head.ejs') %>
-    <title>Document</title>
+    <title><%= film.titleRu %></title>
 </head>
 <body>
     <%- include('partials/header.ejs') %>
 
-    <div class="container">
-        <div class="main">
-            
+    <div class="box">
+        <div class="main main-detail">
+            <div class="detail-film">
+                <div class="detail-left">
+                    <img src="<%= film.poster %>" alt="" class="detail-poster">
+                </div>
+                <div class="detail-right">
+                    <h2 class="detail-titleRu"><%= film.titleRu %> (<%= film.year %>)</h2>
+                    <p class="detail-titleOrig"><%= film.titleOrig %></p>
+                    <% if (user && user.toWatch && user.toWatch.includes(film._id)) { %>
+                        <button class="detail-save-btn" onclick="unsaveFilm('<%= film._id %>')">
+                            <img src="/images/icons/saved.svg" alt="">
+                            Сохранено
+                        </button>
+                    <% } else { %>
+                        <button class="detail-save-btn" onclick="saveFilm('<%= film._id %>')">
+                            <img src="/images/icons/save.svg" alt="">
+                            Буду смотреть
+                        </button>
+                    <% } %>
+
+                    <div class="detail-desc">
+                        <h3>О фильме</h3>
+                        <div class="desc--item">
+                            <p>Год производства</p>
+                            <p><%= film.year %></p>
+                        </div>
+                        <div class="desc--item">
+                            <p>Страна</p>
+                            <p><%= film.country.name %></p>
+                        </div>
+                        <div class="desc--item">
+                            <p>Жанр</p>
+                            <p><%= film.genre.name %></p>
+                        </div>
+                        <div class="desc--item">
+                            <p>Время</p>
+                            <p><%= film.time %> мин.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="film-trailer">
+                <iframe width="800" height="500" src="<%= film.trailerURL %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>            
         </div>
     </div>
 

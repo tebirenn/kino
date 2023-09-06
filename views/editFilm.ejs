@@ -43,6 +43,11 @@
                 </fieldset>
 
                 <fieldset>
+                    <label for="">Трейлер фильма</label>
+                    <input type="text" placeholder="Введите URL трейлера фильма" name="trailerURL" value="<%= film.trailerURL %>">
+                </fieldset>
+
+                <fieldset>
                     <label for="">Страна выпуска</label>
                     <select name="country" class="form-select" aria-label="Default select example">
                         <% countries.forEach((country) => {

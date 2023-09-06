@@ -10,9 +10,11 @@ const createFilm = async(req, res) => {
         req.body.country.length > 0 &&
         req.body.genre.length > 0 &&
         req.body.year.length > 0 &&
-        req.body.time.length > 0) {
+        req.body.time.length > 0 &&
+        req.body.trailerURL.length > 0) {
 
         await new Films({
+            poster: `/images/films/${req.file.filename}`,
             titleRu: req.body.titleRu,
             titleOrig: req.body.titleOrig,
             year: req.body.year,
@@ -20,7 +22,7 @@ const createFilm = async(req, res) => {
             country: req.body.country,
             genre: req.body.genre,
             author: req.user._id,
-            poster: `/images/films/${req.file.filename}`,
+            trailerURL: req.body.trailerURL,
         }).save();
 
         res.redirect(`/admin/${req.user._id}`);
@@ -30,15 +32,22 @@ const createFilm = async(req, res) => {
 }
 
 const editFilm = async(req, res) => {
-    if (req.file && req.body.titleRu.length > 0 &&
+    if (req.body.titleRu.length > 0 &&
         req.body.titleOrig.length > 0 &&
         req.body.country.length > 0 &&
         req.body.genre.length > 0 &&
         req.body.year.length > 0 &&
-        req.body.time.length > 0) {
+        req.body.time.length > 0 &&
+        req.body.trailerURL.length > 0) {
 
         const film = await Films.findById(req.body.id);
-        fs.unlinkSync(path.join(__dirname + '/../../public' + film.poster));
+        if (req.file) {
+            fs.unlinkSync(path.join(__dirname + '/../../public' + film.poster));
+
+            await Films.findByIdAndUpdate(req.body.id, {
+                poster: `/images/films/${req.file.filename}`,
+            });
+        }
 
         await Films.findByIdAndUpdate(req.body.id, {
             titleRu: req.body.titleRu,
@@ -48,7 +57,7 @@ const editFilm = async(req, res) => {
             country: req.body.country,
             genre: req.body.genre,
             author: req.user._id,
-            poster: `/images/films/${req.file.filename}`,
+            trailerURL: req.body.trailerURL,
         });
 
         res.redirect(`/admin/${req.user._id}`);
