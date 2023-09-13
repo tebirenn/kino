@@ -52,8 +52,34 @@
             </div>
 
             <div class="film-trailer">
+                <h3 class="detail-title">Трейлер</h3>
                 <iframe width="800" height="500" src="<%= film.trailerURL %>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>            
+            </div> 
+            
+            <div class="comments">
+                <h3 class="detail-title">Комментарий</h3>
+                <% if (user && user._id) { %>
+                    <form action="" class="add-comment-form">
+                        <p>Оцените фильм</p>
+                        <div class="comment-stars">
+                            <img onclick="rateFilm(1)" src="/images/icons/star.svg" alt="" class="star-icon">
+                            <img onclick="rateFilm(2)" src="/images/icons/star.svg" alt="" class="star-icon">
+                            <img onclick="rateFilm(3)" src="/images/icons/star.svg" alt="" class="star-icon">
+                            <img onclick="rateFilm(4)" src="/images/icons/star.svg" alt="" class="star-icon">
+                            <img onclick="rateFilm(5)" src="/images/icons/star.svg" alt="" class="star-icon">
+                        </div>
+                        <p>Напишите комментарий</p>
+                        <textarea name=""></textarea>
+                        <input type="hidden" value="<%= user._id %>">
+                        <input type="hidden" value="<%= film._id %>">
+                        <button>Добавить</button>
+                    </form>
+                <% } else { %>
+                    <p class="no-user-comment">
+                        <a href="/login">Войдите</a> или <a href="/register">зарегистрируйтесь</a>, чтобы оставить комментарий
+                    </p>
+                <% } %>
+            </div>
         </div>
     </div>
 

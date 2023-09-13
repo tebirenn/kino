@@ -11,14 +11,29 @@ router.get('/', async(req, res) => {
     if (req.query.genre) {
         const selectedGenre = await Genres.findOne({key: req.query.genre});
         options.genre = selectedGenre._id;
+        res.locals.genre = req.query.genre;
     }
+    if (req.query.search && req.query.search.length > 0) {
+        options.$or = [
+            { titleRu: new RegExp(req.query.search, 'i') },   // the     The
+            { titleOrig: new RegExp(req.query.search, 'i') },   // i - ignorecase
+        ];
+        res.locals.search = req.query.search;
+    }
+
+    let limit = 3;
+    let page = req.query.page ? req.query.page : 1;
+
     const genres = await Genres.find();
-    const films = await Films.find(options).populate('genre').populate('country');
+    const films = await Films.find(options).limit(limit).skip((page-1)*limit)
+                        .populate('genre').populate('country');
+    const totalFilmsLength = await Films.count(options);
 
     const data = {
         genres: genres,
         films: films,
-        user: req.user ? req.user : {}
+        user: req.user ? req.user : {},
+        pages: Math.ceil(totalFilmsLength / limit),    //  5 / 3 = 1.6      1.6 -> 2    [3 2]
     }
 
     res.render('index', data);

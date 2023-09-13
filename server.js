@@ -26,6 +26,7 @@ app.use(require('./server/Genres/router'));
 app.use(require('./server/Countries/router'));
 app.use(require('./server/auth/router'));
 app.use(require('./server/Films/router'));
+app.use(require('./server/Rates/router'));
 
 
 const PORT = 8005;

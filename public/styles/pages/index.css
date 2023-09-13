@@ -121,3 +121,12 @@
     text-decoration: none;
     color: #000;
 }
+
+
+.pages-link {
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+    margin: 15px 0;
+    font-size: 18px;
+}

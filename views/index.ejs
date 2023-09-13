@@ -55,6 +55,16 @@
                 </a>
                 <% }) %>
 
+                <div class="pages-link">
+                <%
+                let pageLink = '';  
+                pageLink = locals.genre ? `genre=${locals.genre}&` : pageLink;   // 'genre=1&'     ''
+                pageLink = locals.search ? `search=${locals.search}&` : pageLink; // 'search=the&'  ''
+                %>
+                <% for (let i = 1; i <= pages; i++) { %>
+                    <a href="/?<%= pageLink %>page=<%= i %>"><%= i %></a>
+                <% } %>
+                </div>
             </div>
         </div>
     </div>
