@@ -10,3 +10,25 @@ const rateFilm = (rate) => {
         }
     }
 }
+
+
+const sendRate = (event) => {
+    event.preventDefault();
+    const activeStars = document.querySelectorAll('.active-star').length;
+    const commentText = document.getElementById('commentTextInput').value;
+    const commentFilm = document.getElementById('commentFilm').value;
+    const commentAuthor = document.getElementById('commentAuthor').value;
+
+    if (activeStars > 0) {
+        axios.post('/api/rate', {
+            rate: activeStars,
+            text: commentText,
+            film: commentFilm,
+            author: commentAuthor
+        }).then((data) => {
+            if (data.data) {
+                location.reload();
+            }
+        })
+    }
+}

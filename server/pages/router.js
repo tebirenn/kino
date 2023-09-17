@@ -5,6 +5,17 @@ const Genres = require('../Genres/Genres');
 const Users = require('../auth/Users');
 const Countries = require('../Countries/Countries');
 const Films = require('../Films/Films');
+const Rates = require('../Rates/Rates');
+
+
+const sumRates = (rates) => {
+    let res = 0;
+    for (let rate of rates) {
+        res += rate.rate;
+    }
+    return res;
+}
+
 
 router.get('/', async(req, res) => {
     const options = {};
@@ -126,10 +137,15 @@ router.get('/details/:id', async(req, res) => {
     try {
         const film = await Films.findById(req.params.id)
                                 .populate('country').populate('genre');
+        const rates = await Rates.find({film: film._id}).populate('author');
+        let avgRate = 2 * sumRates(rates) / rates.length;
+
 
         data = {
             user: req.user ? req.user : {},
             film: film,
+            rates: rates,
+            avgRate: avgRate.toFixed(1),
         }
     
         res.render('filmDetails', data);

@@ -31,6 +31,10 @@
                     <div class="detail-desc">
                         <h3>О фильме</h3>
                         <div class="desc--item">
+                            <p>Рейтинг: </p>
+                            <p><%= avgRate %></p>
+                        </div>
+                        <div class="desc--item">
                             <p>Год производства</p>
                             <p><%= film.year %></p>
                         </div>
@@ -59,7 +63,7 @@
             <div class="comments">
                 <h3 class="detail-title">Комментарий</h3>
                 <% if (user && user._id) { %>
-                    <form action="" class="add-comment-form">
+                    <form class="add-comment-form" onsubmit="sendRate(event)">
                         <p>Оцените фильм</p>
                         <div class="comment-stars">
                             <img onclick="rateFilm(1)" src="/images/icons/star.svg" alt="" class="star-icon">
@@ -69,16 +73,35 @@
                             <img onclick="rateFilm(5)" src="/images/icons/star.svg" alt="" class="star-icon">
                         </div>
                         <p>Напишите комментарий</p>
-                        <textarea name=""></textarea>
-                        <input type="hidden" value="<%= user._id %>">
-                        <input type="hidden" value="<%= film._id %>">
-                        <button>Добавить</button>
+                        <textarea id="commentTextInput"></textarea>
+                        <input type="hidden" value="<%= user._id %>" id="commentAuthor">
+                        <input type="hidden" value="<%= film._id %>" id="commentFilm">
+                        <button type="submit">Добавить</button>
                     </form>
                 <% } else { %>
                     <p class="no-user-comment">
                         <a href="/login">Войдите</a> или <a href="/register">зарегистрируйтесь</a>, чтобы оставить комментарий
                     </p>
                 <% } %>
+
+                <% rates.forEach((rate) => { %>
+                <div class="comment--item">
+                    <a href="/profile/<%= rate.author._id %>">
+                        <img src="/images/default-avatar.jfif" alt="">
+                        <%= rate.author.full_name %>
+                    </a>
+                    <div class="comment-stars">
+                        <% for (let i = 0; i < 5; i++) { %>
+                            <% if (i < rate.rate) { %>
+                                <img src="/images/icons/star.svg" alt="" class="star-icon-comment active-star-comment">
+                            <% } else { %>
+                                <img src="/images/icons/star.svg" alt="" class="star-icon-comment">
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <p><%= rate.text %></p>
+                </div>
+                <% }) %>
             </div>
         </div>
     </div>

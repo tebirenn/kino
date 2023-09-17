@@ -101,7 +101,6 @@ const unsaveToWatch = async(req, res) => {
             if (user.toWatch[i] == req.params.id) {
                 user.toWatch.splice(i, 1);
                 user.save();
-                console.log('deleted');
                 break;
             }
         }

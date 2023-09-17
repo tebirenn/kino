@@ -9,6 +9,8 @@ const createAdmin = require('../admin/seed');
 router.post('/api/signup', signUp);
 router.post('/api/signin', passport.authenticate('local', {failureRedirect: '/api/login?error=1'}), signIn);
 router.get('/api/signout', signOut);
+router.get('/api/auth/google', passport.authenticate('google'), signIn);
+
 createAdmin();
 
 
